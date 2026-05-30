@@ -1,0 +1,14 @@
+{
+  "latest": "6.2.0",
+  "versions": {
+    "6.2.0": {
+      "release_date": "2026-05-30",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.2.0/prisma-engines-6.2.0-aarch64.tar.gz",
+          "sha256": "6fcb524834456192c26359de6a1e9674c478a1309c036cbabe1d0f6317f3476c"
+        }
+      }
+    }
+  }
+}

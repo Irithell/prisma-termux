@@ -1,81 +1,201 @@
 import path from "node:path";
 import fs from "node:fs";
-import os from "node:os";
+import readline from "node:readline";
 import { createRequire } from "node:module";
-import { fileURLToPath } from "node:url";
-import { execSync } from "node:child_process";
+import { spawnSync } from "node:child_process";
+import {
+  cRed,
+  cYellow,
+  cCyan,
+  cGreen,
+  cReset,
+  ENGINES_DIR,
+  getHostArch,
+} from "./utils/constants.js";
+import { resolveActiveVersion } from "./utils/resolver.js";
+import { setProjectVersion, setGlobalVersion } from "./utils/registry.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const args = process.argv.slice(2);
+const cwd = process.cwd();
 
-const PRISMA_VERSION = "6.2.0";
-const ARCH = "aarch64";
+async function ask(question: string): Promise<string> {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+  return new Promise((resolve) => {
+    rl.question(question, (answer) => {
+      rl.close();
+      resolve(answer.trim().toLowerCase());
+    });
+  });
+}
 
-const enginesDir = path.join(
-  os.homedir(),
-  ".prisma-termux-engines",
-  PRISMA_VERSION,
-  ARCH,
-);
-
-const queryEngine = path.join(enginesDir, "query-engine");
-const schemaEngine = path.join(enginesDir, "schema-engine");
-const fmtEngine = path.join(enginesDir, "prisma-fmt");
-
-const enginesExist =
-  fs.existsSync(queryEngine) &&
-  fs.existsSync(schemaEngine) &&
-  fs.existsSync(fmtEngine);
-
-if (!enginesExist) {
-  console.log(
-    "\n[@irithell-js/prisma-termux] Engines not found in Home directory.",
-  );
-  console.log(
-    "[@irithell-js/prisma-termux] The postinstall script might have failed or been skipped.",
-  );
-  console.log(
-    "[@irithell-js/prisma-termux] Initiating automatic installation...\n",
-  );
+function getLocalPrismaVersion(): string | null {
+  const pkgPath = path.join(cwd, "package.json");
+  if (!fs.existsSync(pkgPath)) return null;
 
   try {
-    execSync(`node ${path.join(__dirname, "install.js")}`, {
-      stdio: "inherit",
-    });
-  } catch (e) {
-    console.error(
-      "\n[@irithell-js/prisma-termux] Error during automatic installation.",
+    const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf-8"));
+    const version =
+      pkg.devDependencies?.prisma ||
+      pkg.dependencies?.prisma ||
+      pkg.dependencies?.["@prisma/client"];
+    return version ? version.replace(/[\^~]/g, "") : null;
+  } catch {
+    return null;
+  }
+}
+
+function injectEnvVariables(enginesPath: string) {
+  process.env.PRISMA_QUERY_ENGINE_BINARY = path.join(
+    enginesPath,
+    "query-engine",
+  );
+  process.env.PRISMA_SCHEMA_ENGINE_BINARY = path.join(
+    enginesPath,
+    "schema-engine",
+  );
+  process.env.PRISMA_FMT_BINARY = path.join(enginesPath, "prisma-fmt");
+  process.env.PRISMA_CLI_QUERY_ENGINE_TYPE = "binary";
+  process.env.PRISMA_CLIENT_ENGINE_TYPE = "binary";
+}
+
+if (args[0] === "engines") {
+  const command = args[1] || "help";
+
+  switch (command) {
+    case "ls":
+      const { lsCommand } = await import("./commands/ls.js");
+      lsCommand();
+      break;
+    case "ls-remote":
+      const { lsRemoteCommand } = await import("./commands/ls-remote.js");
+      await lsRemoteCommand();
+      break;
+    case "install":
+      const { installCommand } = await import("./commands/install.js");
+      await installCommand(args.slice(2));
+      break;
+    case "use":
+      const { useCommand } = await import("./commands/use.js");
+      await useCommand(args.slice(2));
+      break;
+    case "prune":
+      const { pruneCommand } = await import("./commands/prune.js");
+      await pruneCommand();
+      break;
+    case "self-uninstall":
+      const { selfUninstallCommand } =
+        await import("./commands/self-uninstall.js");
+      selfUninstallCommand();
+      break;
+    case "help":
+      const { helpCommand } = await import("./commands/help.js");
+      helpCommand();
+      break;
+    default:
+      console.log(
+        `\n${cRed}[ @irithell-js/prisma-termux ] Unknown engines command: ${command}${cReset}`,
+      );
+      console.log(
+        `${cCyan}Run ${cGreen}prisma-termux engines help${cCyan} to see all available commands.${cReset}\n`,
+      );
+      process.exit(1);
+  }
+  process.exit(0);
+}
+
+const localExpectedVersion = getLocalPrismaVersion();
+const activeVersion = resolveActiveVersion(cwd);
+const targetVersion = activeVersion || localExpectedVersion;
+
+if (!targetVersion) {
+  console.log(
+    `\n${cRed}[ @irithell-js/prisma-termux ] ERROR: Cannot determine Prisma version.${cReset}`,
+  );
+  console.log(
+    `${cCyan}Please install Prisma locally or run: prisma-termux engines use <version>${cReset}\n`,
+  );
+  process.exit(1);
+}
+
+const hostArch = getHostArch();
+const targetEnginesDir = path.join(ENGINES_DIR, targetVersion, hostArch);
+
+const enginesExist =
+  fs.existsSync(path.join(targetEnginesDir, "query-engine")) &&
+  fs.existsSync(path.join(targetEnginesDir, "schema-engine")) &&
+  fs.existsSync(path.join(targetEnginesDir, "prisma-fmt"));
+
+if (
+  !enginesExist ||
+  (localExpectedVersion && localExpectedVersion !== activeVersion)
+) {
+  console.log(
+    `\n${cYellow}[ @irithell-js/prisma-termux ] Version Check:${cReset}`,
+  );
+  console.log(`  Project requested : ${localExpectedVersion || "None"}`);
+  console.log(`  Termux Active     : ${activeVersion || "None"}`);
+  console.log(`  Engines Installed : ${enginesExist ? "Yes" : "No"}`);
+
+  const ans = await ask(
+    `\n${cCyan}Do you want to download/setup engines v${targetVersion} now? [s/N]: ${cReset}`,
+  );
+
+  if (ans === "s" || ans === "sim" || ans === "y" || ans === "yes") {
+    console.log(
+      `\n${cCyan}[ @irithell-js/prisma-termux ] Routing to install module...${cReset}`,
     );
-    console.error(
-      "[@irithell-js/prisma-termux] Please run the installation manually or check your internet connection.\n",
+
+    const { installCommand } = await import("./commands/install.js");
+    await installCommand([targetVersion]);
+
+    const saveAns = await ask(
+      `\n${cCyan}Save v${targetVersion} as default? (1: .env, 2: .prisma-termuxrc, 3: Registry Local, 4: Registry Global, 0: Just run): ${cReset}`,
+    );
+
+    if (saveAns === "1") {
+      const { saveToEnv } = await import("./utils/config.js");
+      saveToEnv(cwd, targetVersion);
+      console.log(`${cGreen}Saved to .env${cReset}`);
+    } else if (saveAns === "2") {
+      const { saveToRc } = await import("./utils/config.js");
+      saveToRc(cwd, targetVersion);
+      console.log(`${cGreen}Saved to .prisma-termuxrc${cReset}`);
+    } else if (saveAns === "3") {
+      setProjectVersion(cwd, targetVersion);
+      console.log(`${cGreen}Saved to registry.json (Local context)${cReset}`);
+    } else if (saveAns === "4") {
+      setGlobalVersion(targetVersion);
+      console.log(`${cGreen}Saved to registry.json (Global context)${cReset}`);
+    }
+  } else {
+    console.log(
+      `\n${cRed}[ @irithell-js/prisma-termux ] Execution aborted by user.${cReset}\n`,
     );
     process.exit(1);
   }
 }
 
-process.env.PRISMA_QUERY_ENGINE_BINARY = queryEngine;
-process.env.PRISMA_SCHEMA_ENGINE_BINARY = schemaEngine;
-process.env.PRISMA_FMT_BINARY = fmtEngine;
+injectEnvVariables(targetEnginesDir);
 
-process.env.PRISMA_CLI_QUERY_ENGINE_TYPE = "binary";
-process.env.PRISMA_CLIENT_ENGINE_TYPE = "binary";
-
-Object.defineProperty(process, "platform", { value: "linux" });
-
-const require = createRequire(path.join(process.cwd(), "package.json"));
+const req = createRequire(path.join(cwd, "package.json"));
 let prismaCliPath;
 
 try {
-  prismaCliPath = require.resolve("prisma/build/index.js");
+  prismaCliPath = req.resolve("prisma/build/index.js");
 } catch (e) {
   console.error(
-    "\n[@irithell-js/prisma-termux] Error: Original Prisma CLI not found in your project.",
+    `\n${cRed}[ @irithell-js/prisma-termux ] ERROR: Original Prisma CLI not found in your project.${cReset}`,
   );
-  console.error(
-    "[@irithell-js/prisma-termux] Make sure you have installed it:",
-  );
-  console.error("npm install prisma --save-dev\n");
+  console.error(`${cCyan}Run: npm install prisma --save-dev${cReset}\n`);
   process.exit(1);
 }
 
-require(prismaCliPath);
+const result = spawnSync(process.execPath, [prismaCliPath, ...args], {
+  stdio: "inherit",
+  env: process.env,
+});
+
+process.exit(result.status ?? 0);

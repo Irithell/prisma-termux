@@ -1,10 +1,17 @@
 {
   "name": "@irithell-js/prisma-termux",
   "version": "1.0.0",
-  "description": "Prisma ORM nativo para Termux no Android",
+  "description": "Native Prisma ORM for Termux on Android",
   "type": "module",
   "bin": {
     "prisma-termux": "./dist/cli.js"
+  },
+  "files": [
+    "dist/"
+  ],
+  "main": "./dist/load.js",
+  "exports": {
+    ".": "./dist/load.js"
   },
   "scripts": {
     "build": "tsup",
