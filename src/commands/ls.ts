@@ -35,22 +35,32 @@ export function lsCommand() {
     if (!item.isDirectory() || item.name.startsWith(".")) continue;
 
     const version = item.name;
-    const archPath = path.join(ENGINES_DIR, version, hostArch);
+    const versionDir = path.join(ENGINES_DIR, version);
 
-    if (!fs.existsSync(archPath)) continue;
+    const installedArchs = fs
+      .readdirSync(versionDir, { withFileTypes: true })
+      .filter((d) => d.isDirectory())
+      .map((d) => d.name);
 
-    count++;
+    for (const arch of installedArchs) {
+      count++;
+      const tags: string[] = [];
 
-    const tags: string[] = [];
-    if (version === activeVersion) tags.push(`${cGreen}active${cReset}`);
-    if (version === registry.global) tags.push(`${cYellow}global${cReset}`);
+      if (arch === hostArch) {
+        if (version === activeVersion) tags.push(`${cGreen}active${cReset}`);
+        if (version === registry.global) tags.push(`${cYellow}global${cReset}`);
+      }
 
-    const tagString = tags.length > 0 ? ` (${tags.join(", ")})` : "";
-    console.log(`  - ${version}${tagString}`);
+      const tagString = tags.length > 0 ? ` (${tags.join(", ")})` : "";
+      const paddedVersion = version.padEnd(8, " ");
+      console.log(
+        `  - ${paddedVersion} [ ${cCyan}${arch}${cReset} ]${tagString}`,
+      );
+    }
   }
 
   if (count === 0) {
-    console.log(`  ${cYellow}No versions installed for ${hostArch}.${cReset}`);
+    console.log(`  ${cYellow}No versions installed.${cReset}`);
   }
 
   console.log(

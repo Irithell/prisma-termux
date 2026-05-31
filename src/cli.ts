@@ -48,10 +48,6 @@ function getLocalPrismaVersion(): string | null {
 }
 
 function injectEnvVariables(enginesPath: string) {
-  process.env.PRISMA_QUERY_ENGINE_BINARY = path.join(
-    enginesPath,
-    "query-engine",
-  );
   process.env.PRISMA_SCHEMA_ENGINE_BINARY = path.join(
     enginesPath,
     "schema-engine",
@@ -59,6 +55,13 @@ function injectEnvVariables(enginesPath: string) {
   process.env.PRISMA_FMT_BINARY = path.join(enginesPath, "prisma-fmt");
   process.env.PRISMA_CLI_QUERY_ENGINE_TYPE = "binary";
   process.env.PRISMA_CLIENT_ENGINE_TYPE = "binary";
+
+  if (fs.existsSync(path.join(enginesPath, "query-engine"))) {
+    process.env.PRISMA_QUERY_ENGINE_BINARY = path.join(
+      enginesPath,
+      "query-engine",
+    );
+  }
 }
 
 if (args[0] === "engines") {
@@ -89,6 +92,10 @@ if (args[0] === "engines") {
       const { selfUninstallCommand } =
         await import("./commands/self-uninstall.js");
       selfUninstallCommand();
+      break;
+    case "update":
+      const { updateCommand } = await import("./commands/update.js");
+      await updateCommand();
       break;
     case "help":
       const { helpCommand } = await import("./commands/help.js");
@@ -123,10 +130,16 @@ if (!targetVersion) {
 const hostArch = getHostArch();
 const targetEnginesDir = path.join(ENGINES_DIR, targetVersion, hostArch);
 
+const hasSchema = fs.existsSync(path.join(targetEnginesDir, "schema-engine"));
+const hasFmt = fs.existsSync(path.join(targetEnginesDir, "prisma-fmt"));
+const hasQueryEngine = fs.existsSync(
+  path.join(targetEnginesDir, "query-engine"),
+);
+
+const majorVersion = parseInt(targetVersion.split(".")[0], 10);
+
 const enginesExist =
-  fs.existsSync(path.join(targetEnginesDir, "query-engine")) &&
-  fs.existsSync(path.join(targetEnginesDir, "schema-engine")) &&
-  fs.existsSync(path.join(targetEnginesDir, "prisma-fmt"));
+  hasSchema && hasFmt && (majorVersion >= 7 || hasQueryEngine);
 
 if (
   !enginesExist ||
@@ -140,7 +153,7 @@ if (
   console.log(`  Engines Installed : ${enginesExist ? "Yes" : "No"}`);
 
   const ans = await ask(
-    `\n${cCyan}Do you want to download/setup engines v${targetVersion} now? [s/N]: ${cReset}`,
+    `\n${cCyan}Do you want to download/setup engines v${targetVersion} now? [y/N]: ${cReset}`,
   );
 
   if (ans === "s" || ans === "sim" || ans === "y" || ans === "yes") {

@@ -26,6 +26,9 @@ export function helpCommand() {
     `  ${cGreen}prune${cReset}             Remove orphaned engine versions to free up storage.`,
   );
   console.log(
+    `  ${cGreen}update${cReset}            Check for module updates in the NPM registry.`,
+  );
+  console.log(
     `  ${cGreen}self-uninstall${cReset}    Remove the global CLI wrapper and show local script setup.`,
   );
   console.log(

@@ -11,7 +11,6 @@ import {
   cYellow,
   ENGINES_DIR,
   getHostArch,
-  ENGINES,
 } from "../utils/constants.js";
 import { fetchManifest } from "./ls-remote.js";
 import { downloadFile } from "../utils/downloader.js";
@@ -76,10 +75,14 @@ export async function installCommand(args: string[]) {
     const targetDir = path.join(ENGINES_DIR, targetVersion, targetArch);
 
     if (fs.existsSync(targetDir)) {
-      const allExist = ENGINES.every((engine) =>
-        fs.existsSync(path.join(targetDir, engine)),
-      );
-      if (allExist) {
+      const hasSchema = fs.existsSync(path.join(targetDir, "schema-engine"));
+      const hasFmt = fs.existsSync(path.join(targetDir, "prisma-fmt"));
+      const hasQE = fs.existsSync(path.join(targetDir, "query-engine"));
+
+      const majorVersion = parseInt(targetVersion.split(".")[0], 10);
+      const isHealthy = hasSchema && hasFmt && (majorVersion >= 7 || hasQE);
+
+      if (isHealthy) {
         console.log(
           `\n${cGreen}✔ Engines v${targetVersion} for ${targetArch} are already installed and verified.${cReset}\n`,
         );
@@ -118,9 +121,10 @@ export async function installCommand(args: string[]) {
     });
 
     console.log(`${cCyan}Applying execution permissions...${cReset}`);
-    for (const engine of ENGINES) {
-      const enginePath = path.join(targetDir, engine);
-      execSync(`chmod +x "${enginePath}"`);
+    const installedFiles = fs.readdirSync(targetDir);
+    for (const file of installedFiles) {
+      const filePath = path.join(targetDir, file);
+      execSync(`chmod +x "${filePath}"`);
     }
 
     console.log(`${cCyan}Cleaning up...${cReset}`);

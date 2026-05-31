@@ -12,8 +12,6 @@ export const REGISTRY_PATH = path.join(ENGINES_DIR, "registry.json");
 export const MANIFEST_URL =
   "https://raw.githubusercontent.com/Irithell/prisma-termux/main/manifest.json";
 
-export const ENGINES = ["query-engine", "schema-engine", "prisma-fmt"];
-
 export function getHostArch(): string {
   const arch = os.arch();
 

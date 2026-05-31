@@ -1,12 +1,327 @@
 {
   "latest": "6.2.0",
   "versions": {
+    "6.0.0": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.0.0/prisma-engines-6.0.0-aarch64.tar.gz",
+          "sha256": "15ee83a2df48381768b5df880a675c536e2ed018bf4144f0a8c159fe5429a2db"
+        }
+      }
+    },
+    "6.0.1": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.0.1/prisma-engines-6.0.1-aarch64.tar.gz",
+          "sha256": "8ef1d18a553494d1dff1feafc0991d1353dcbfbe509978641b9c3dd4ecba1eef"
+        }
+      }
+    },
+    "6.1.0": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.1.0/prisma-engines-6.1.0-aarch64.tar.gz",
+          "sha256": "bc9b6c261371417faed2682dfaf2a95af39aae7dc6636d024ef0488718e3edc7"
+        }
+      }
+    },
     "6.2.0": {
-      "release_date": "2026-05-30",
+      "release_date": "2026-05-31",
       "architectures": {
         "aarch64": {
           "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.2.0/prisma-engines-6.2.0-aarch64.tar.gz",
-          "sha256": "6fcb524834456192c26359de6a1e9674c478a1309c036cbabe1d0f6317f3476c"
+          "sha256": "f71b9a5884fba73b541b37ff31183b7053d13d52a1e0ca5bf91f943451a4ba7c"
+        }
+      }
+    },
+    "6.2.1": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.2.1/prisma-engines-6.2.1-aarch64.tar.gz",
+          "sha256": "ee77e1ef010bd8445334bf83de52d522a50afa5afc98f047e15383e1ab85c9fb"
+        }
+      }
+    },
+    "6.3.0": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.3.0/prisma-engines-6.3.0-aarch64.tar.gz",
+          "sha256": "b8adeda55c3e2c7b0bd1a705569e31d493087d4a371dc25f028bd12b07312b40"
+        }
+      }
+    },
+    "6.3.1": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.3.1/prisma-engines-6.3.1-aarch64.tar.gz",
+          "sha256": "10fc958e396deb781e906c3c58d8264b99ead1007f0d0f58a40a2d852ac79b6e"
+        }
+      }
+    },
+    "6.4.0": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.4.0/prisma-engines-6.4.0-aarch64.tar.gz",
+          "sha256": "4efb4a9f07c686354ba315a18636c9db00bae0241ed56070b280f4ea3c8ac84f"
+        }
+      }
+    },
+    "6.4.1": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.4.1/prisma-engines-6.4.1-aarch64.tar.gz",
+          "sha256": "a1526cb7fa08e93c024ba82143c838d79b38de351d202ed271b37fbc848c6bb8"
+        }
+      }
+    },
+    "6.5.0": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.5.0/prisma-engines-6.5.0-aarch64.tar.gz",
+          "sha256": "73acf3197d91eb288291313ee9a342b2d2d4157fa05380b95ee13f80ae3200a3"
+        }
+      }
+    },
+    "6.6.0": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.6.0/prisma-engines-6.6.0-aarch64.tar.gz",
+          "sha256": "1ca1c73119f19464b30425eaeb3e0ba0722a7ca1fb34588da672287eab016068"
+        }
+      }
+    },
+    "6.7.0": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.7.0/prisma-engines-6.7.0-aarch64.tar.gz",
+          "sha256": "2417cf62715c7ff82b8488414f624b38eb70c46a6ae3ed5d569865d69d0abf3e"
+        }
+      }
+    },
+    "6.8.0": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.8.0/prisma-engines-6.8.0-aarch64.tar.gz",
+          "sha256": "96f3ab537974a8139e84437b94088e73d84f7fb12fb9afc97539dad156de10b5"
+        }
+      }
+    },
+    "6.8.1": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.8.1/prisma-engines-6.8.1-aarch64.tar.gz",
+          "sha256": "b0d2e26d52c4e9aed7815b5f82d8f309d460dccfe9055beaf20ecad0dadf39b9"
+        }
+      }
+    },
+    "6.8.2": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.8.2/prisma-engines-6.8.2-aarch64.tar.gz",
+          "sha256": "f901646adeed57ab855a0eefe129a8071bcbb8d550a707435f56f3e1a717b7a3"
+        }
+      }
+    },
+    "6.9.0": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.9.0/prisma-engines-6.9.0-aarch64.tar.gz",
+          "sha256": "436bd247f7aca770be07d554f838cb99f9a970ea0f26b6f19b8c9c455d49daaf"
+        }
+      }
+    },
+    "6.10.0": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.10.0/prisma-engines-6.10.0-aarch64.tar.gz",
+          "sha256": "efa8d835fb4cdbaafc7bed0319f6d79606fc426f6262267a483804ce48f35447"
+        }
+      }
+    },
+    "6.10.1": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.10.1/prisma-engines-6.10.1-aarch64.tar.gz",
+          "sha256": "eabb5b810cab2e08a6d48e70e45f40d601bbdbb2981c5d75f011f6ca7b3be853"
+        }
+      }
+    },
+    "6.11.0": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.11.0/prisma-engines-6.11.0-aarch64.tar.gz",
+          "sha256": "33795e832d9fb7da53815f259e627098fc1044e951696bda8010dc3fca45116d"
+        }
+      }
+    },
+    "6.11.1": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.11.1/prisma-engines-6.11.1-aarch64.tar.gz",
+          "sha256": "77e1a33fe2354b388d71648d640cb14787836782c252dc2574785b6e38d7905d"
+        }
+      }
+    },
+    "6.12.0": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.12.0/prisma-engines-6.12.0-aarch64.tar.gz",
+          "sha256": "c600f7a5c3598cd3444c53bae948664bbf698aa92c30bcd3522fe3a7d5ed646c"
+        }
+      }
+    },
+    "6.13.0": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.13.0/prisma-engines-6.13.0-aarch64.tar.gz",
+          "sha256": "b5ecf62f642612056bf45398bd80684cc644dac50eb7cf2f3056d97144147db8"
+        }
+      }
+    },
+    "6.14.0": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.14.0/prisma-engines-6.14.0-aarch64.tar.gz",
+          "sha256": "6fbdf2f901d62be1172b03a258c1f86e2ec893bb418664e87a313b05fca59308"
+        }
+      }
+    },
+    "6.15.0": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.15.0/prisma-engines-6.15.0-aarch64.tar.gz",
+          "sha256": "a8961034294b8b4c2d71c00d676a45fba2536aa69a3f150e575da15858efad0d"
+        }
+      }
+    },
+    "6.16.0": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.16.0/prisma-engines-6.16.0-aarch64.tar.gz",
+          "sha256": "b5114068a0aac77eb4e3092980e3153c262dc11e383ec7a3ec8817c24d5666de"
+        }
+      }
+    },
+    "6.16.1": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.16.1/prisma-engines-6.16.1-aarch64.tar.gz",
+          "sha256": "0d72afa7080830ad7734dbd3a71e8d45104c613b9283d9331ffef2cce0718642"
+        }
+      }
+    },
+    "6.16.2": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.16.2/prisma-engines-6.16.2-aarch64.tar.gz",
+          "sha256": "27b2f4581df7a8ed627b94a9c6c08ebeec9deb87d0de4000562b2efee1fa34d7"
+        }
+      }
+    },
+    "6.16.3": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.16.3/prisma-engines-6.16.3-aarch64.tar.gz",
+          "sha256": "a0d60ae25ece90fb91a6aa9ade4c4165fa2a86849ee584a977159e6964d39f82"
+        }
+      }
+    },
+    "6.17.0": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.17.0/prisma-engines-6.17.0-aarch64.tar.gz",
+          "sha256": "416e5a077dfb422ee985c8837d4421fc569cf8945e1f2959aee053d540fbe77e"
+        }
+      }
+    },
+    "6.17.1": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.17.1/prisma-engines-6.17.1-aarch64.tar.gz",
+          "sha256": "ab743b55a9d34e8baadd19659e297ffac33df6bc9fe3b96f316e4a569318da79"
+        }
+      }
+    },
+    "6.18.0": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.18.0/prisma-engines-6.18.0-aarch64.tar.gz",
+          "sha256": "5a0b7ee64e75a47ec8d28891725335b0b250bf1d75184c27389a71921c7d3a12"
+        }
+      }
+    },
+    "6.19.0": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.19.0/prisma-engines-6.19.0-aarch64.tar.gz",
+          "sha256": "67e22191b610283e3134fa298f867aa4f3f70f78eb3b42d22a4c604e1c9d81a1"
+        }
+      }
+    },
+    "6.19.1": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.19.1/prisma-engines-6.19.1-aarch64.tar.gz",
+          "sha256": "2d2420ff815be1a3a6e8457d923e3b2d20accebc1d882a611b225d6d5bb69631"
+        }
+      }
+    },
+    "6.19.2": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.19.2/prisma-engines-6.19.2-aarch64.tar.gz",
+          "sha256": "92d3cddd2232663aed8c0349171f8955e6ce7fe40f12e1ae0d720aa1b5251038"
+        }
+      }
+    },
+    "6.19.3": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v6.19.3/prisma-engines-6.19.3-aarch64.tar.gz",
+          "sha256": "40dd27f6aeb207fd0d5c36bc2fe81451661d2a61253f8fc9cdefe37210bb72dd"
+        }
+      }
+    },
+    "7.0.0": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v7.0.0/prisma-engines-7.0.0-aarch64.tar.gz",
+          "sha256": "eed1438cafc11c20b075d89878d749c0f679146657dd58f50421270e395ad84e"
         }
       }
     }

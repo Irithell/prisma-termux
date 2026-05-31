@@ -58,20 +58,34 @@ export async function lsRemoteCommand() {
   try {
     const manifest = await fetchManifest();
     const hostArch = getHostArch();
+    const displayArchs = ["aarch64", "armv7", "x86_64"];
 
-    console.log(`  VERSION     ${hostArch.toUpperCase()} (Your OS)`);
-    console.log(`  -----------------------------------`);
+    let header = "  VERSION       ";
+    displayArchs.forEach((arch) => {
+      const title =
+        arch === hostArch ? `${arch.toUpperCase()} (OS)` : arch.toUpperCase();
+      header += title.padEnd(16, " ");
+    });
+
+    console.log(header);
+    console.log(
+      `  --------------------------------------------------------------`,
+    );
 
     for (const [version, details] of Object.entries(manifest.versions)) {
-      const isSupported = !!details.architectures[hostArch];
-      const supportTag = isSupported
-        ? `${cGreen}✔ Available${cReset}`
-        : `${cRed}✖ Unavailable${cReset}`;
+      let row = `  ${version.padEnd(14, " ")}`;
+
+      displayArchs.forEach((arch) => {
+        const isSupported = !!details.architectures[arch];
+        const icon = isSupported
+          ? `${cGreen}✔ Available${cReset}   `
+          : `${cRed}✖ Unavail.${cReset}    `;
+        row += icon;
+      });
+
       const latestTag =
         version === manifest.latest ? ` ${cYellow}(latest)${cReset}` : "";
-
-      const paddedVersion = version.padEnd(10, " ");
-      console.log(`  ${paddedVersion}  ${supportTag}${latestTag}`);
+      console.log(row + latestTag);
     }
 
     console.log(
