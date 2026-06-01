@@ -47,14 +47,17 @@ function getLocalPrismaVersion(): string | null {
   }
 }
 
-function injectEnvVariables(enginesPath: string) {
+function injectEnvVariables(enginesPath: string, majorVersion: number) {
   process.env.PRISMA_SCHEMA_ENGINE_BINARY = path.join(
     enginesPath,
     "schema-engine",
   );
   process.env.PRISMA_FMT_BINARY = path.join(enginesPath, "prisma-fmt");
-  process.env.PRISMA_CLI_QUERY_ENGINE_TYPE = "binary";
-  process.env.PRISMA_CLIENT_ENGINE_TYPE = "binary";
+
+  if (majorVersion < 7) {
+    process.env.PRISMA_CLI_QUERY_ENGINE_TYPE = "binary";
+    process.env.PRISMA_CLIENT_ENGINE_TYPE = "binary";
+  }
 
   if (fs.existsSync(path.join(enginesPath, "query-engine"))) {
     process.env.PRISMA_QUERY_ENGINE_BINARY = path.join(
@@ -191,7 +194,7 @@ if (
   }
 }
 
-injectEnvVariables(targetEnginesDir);
+injectEnvVariables(targetEnginesDir, majorVersion);
 
 const req = createRequire(path.join(cwd, "package.json"));
 let prismaCliPath;

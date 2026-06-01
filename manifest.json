@@ -1,5 +1,5 @@
 {
-  "latest": "6.2.0",
+  "latest": "7.8.0",
   "versions": {
     "6.0.0": {
       "release_date": "2026-05-31",
@@ -322,6 +322,105 @@
         "aarch64": {
           "url": "https://github.com/Irithell/prisma-termux/releases/download/v7.0.0/prisma-engines-7.0.0-aarch64.tar.gz",
           "sha256": "eed1438cafc11c20b075d89878d749c0f679146657dd58f50421270e395ad84e"
+        }
+      }
+    },
+    "7.0.1": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v7.0.1/prisma-engines-7.0.1-aarch64.tar.gz",
+          "sha256": "93651e7d1490d821f5f618e2d07fa248bf71ad1aa5fe03b7e594f9caaef0edc4"
+        }
+      }
+    },
+    "7.1.0": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v7.1.0/prisma-engines-7.1.0-aarch64.tar.gz",
+          "sha256": "425298a652c53cc6dad022da75b26028c2ac60ca805ba1b253e9a234566c2346"
+        }
+      }
+    },
+    "7.2.0": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v7.2.0/prisma-engines-7.2.0-aarch64.tar.gz",
+          "sha256": "fa825ddebe9c3a6f876ecea68b190e44769e63556ceb2f8e0e59e0562e72b1c2"
+        }
+      }
+    },
+    "7.3.0": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v7.3.0/prisma-engines-7.3.0-aarch64.tar.gz",
+          "sha256": "efbcbdc19f8ec22fdbc7d89c5d5dc3961da949abd7a34f362f550cf86d892337"
+        }
+      }
+    },
+    "7.4.0": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v7.4.0/prisma-engines-7.4.0-aarch64.tar.gz",
+          "sha256": "32e9c89cb669cb1dacbc076f67747dcbc64187b47517c345dcdc63d55f2dc31a"
+        }
+      }
+    },
+    "7.4.1": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v7.4.1/prisma-engines-7.4.1-aarch64.tar.gz",
+          "sha256": "711eb59feb3e4f9c19f552e056ff11b828d708ba9abd2e4c94409ee98c9ded28"
+        }
+      }
+    },
+    "7.4.2": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v7.4.2/prisma-engines-7.4.2-aarch64.tar.gz",
+          "sha256": "77b4e0e9aba5175fc21687cbbed8f329043e80d5316177d60acc2584ffb8ff91"
+        }
+      }
+    },
+    "7.5.0": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v7.5.0/prisma-engines-7.5.0-aarch64.tar.gz",
+          "sha256": "a52b49aa617e946e61404f992844ad0023e491ea99889fd4c9ca67d278ab63de"
+        }
+      }
+    },
+    "7.6.0": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v7.6.0/prisma-engines-7.6.0-aarch64.tar.gz",
+          "sha256": "80a38cb7281b019868fbec0819a9194249ea3d7d15526587079ad4a6d67c309b"
+        }
+      }
+    },
+    "7.7.0": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v7.7.0/prisma-engines-7.7.0-aarch64.tar.gz",
+          "sha256": "dcc50bb2f503dcacfe19f9a3bea887c1cc676da89c054b610f45facde82ab2a6"
+        }
+      }
+    },
+    "7.8.0": {
+      "release_date": "2026-05-31",
+      "architectures": {
+        "aarch64": {
+          "url": "https://github.com/Irithell/prisma-termux/releases/download/v7.8.0/prisma-engines-7.8.0-aarch64.tar.gz",
+          "sha256": "067e1782889ead5a6aabc41dc95e1a3d0515cdb25ab68d2abba4a1543e29e1c2"
         }
       }
     }
